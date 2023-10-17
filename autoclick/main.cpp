@@ -10,44 +10,46 @@ class Autoclicker
 public:
 	Autoclicker();
 	~Autoclicker();
+	void banner();
 	void listen();
 	void background();
-	void banner();
 private:
-	bool click = false;
-	bool flags = false;
-	int delay = 200;
+	static bool click;
+	static bool flags;
+	static int delay;
 	string num;
 	string options;
 };
 
 Autoclicker::Autoclicker()
 {
-
 }
 
 Autoclicker::~Autoclicker()
 {
-
 }
+
+bool Autoclicker::click = false;
+bool Autoclicker::flags = true;
+int Autoclicker::delay = 200;
 
 void Autoclicker::banner()
 {
 	cout << "[F6] Start / Stop" << endl;
 	cout << "[*] Delay" << endl;
-	cout << "Delay: " << this->delay << endl;
-	string result = (this->click == true) ? ">> ON" : ">> OFF";
+	cout << "Delay: " << delay << endl;
+	string result = (click == true) ? ">> ON" : ">> OFF";
 	cout << result << endl;
 }
 
 void Autoclicker::background()
 {
-	while (this->flags)
+	while (flags)
 	{
-		if (this->click) {
+		if (click) {
 			mouse_event(MOUSEEVENTF_LEFTUP, 0, 0, 0, 0);
 			mouse_event(MOUSEEVENTF_LEFTDOWN, 0, 0, 0, 0);
-			Sleep(this->delay);
+			Sleep(delay);
 		}
 		Sleep(1);
 	}
@@ -129,7 +131,7 @@ int main(void) {
 
 	Autoclicker instance;
 	instance.banner();
-	instance.listen();
 	thread working(secondary, instance);
+	instance.listen();
 	return 0;
 }
