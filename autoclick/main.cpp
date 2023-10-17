@@ -108,14 +108,15 @@ void Autoclicker::listen()
 	}
 }
 
-void secondary(Autoclicker* instance) {
-	instance->background();
+void secondary(Autoclicker instance) {
+	instance.background();
 }
 
 int main(void) {
-	// if win < 11
+#pragma region win < 11
+	// Sise console
 	HANDLE wHnd = GetStdHandle(STD_OUTPUT_HANDLE);
-	SMALL_RECT windowsSize = { 0,0,60, 10 };
+	SMALL_RECT windowsSize = { 0, 0, 60, 10 };
 	SetConsoleWindowInfo(wHnd, 1, &windowsSize);
 
 	// TOP MOST
@@ -124,12 +125,11 @@ int main(void) {
 
 	// Properties of the console.
 	ShowWindow(consoleWindowHandle, SW_NORMAL);
+#pragma endregion
 
-	Autoclicker* instance = new Autoclicker();
-	instance->banner();
-	instance->listen();
+	Autoclicker instance;
+	instance.banner();
+	instance.listen();
 	thread working(secondary, instance);
-
-	delete instance;
 	return 0;
 }
