@@ -114,7 +114,7 @@ void secondary(Autoclicker instance) {
 
 int main(void) {
 #pragma region win < 11
-	// Sise console
+	// Console size
 	HANDLE wHnd = GetStdHandle(STD_OUTPUT_HANDLE);
 	SMALL_RECT windowsSize = { 0, 0, 60, 10 };
 	SetConsoleWindowInfo(wHnd, 1, &windowsSize);
